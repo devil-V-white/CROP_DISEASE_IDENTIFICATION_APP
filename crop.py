@@ -2,11 +2,6 @@ import streamlit as st
 import tensorflow as tf
 import numpy as np
 from PIL import Image, ImageOps
-from keras.models import model_from_json
-import cv2 
-from PIL import Image
-import matplotlib.pyplot as plt
-from tensorflow.keras.models import load_model
 
 st.write("""
           # Crop Disease Identification
@@ -14,18 +9,13 @@ st.write("""
           )
 upload_file = st.sidebar.file_uploader("Upload Crop Leaf Images", type="jpg")
 Generate_pred=st.sidebar.button("Predict")
-json_file = open('Grape_Model.json','r')
-loaded_model_json = json_file.read()
-json_file.close()
-loaded_model = model_from_json(loaded_model_json)
-#load woeights into new model
-loaded_model.load_weights("GrapeModel_weights.h5")
+model=tf.keras.models.load_model('DENSENET.h5')
 def import_n_pred(image_data, model):
     size = (256,256)
     image = ImageOps.fit(image_data, size, Image.ANTIALIAS)
     img = np.asarray(image)
     reshape=img[np.newaxis,...]
-    prediction = loaded_model.predict(reshape)
+    prediction = model.predict(reshape)
     return prediction
     
 if upload_file is None:
@@ -45,3 +35,4 @@ else:
         st.header('\nTreatment:\nSpraying of the grapevines at 3-4 leaf stage with fungicides like Bordeaux mixture @ 0.8% or Copper Oxychloride @ 0.25% or Carbendazim @ 0.1% are effective against    this disease.')
     elif np.argmax(prediction)==3:
         st.header('\nPlants are healthy')
+
