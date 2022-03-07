@@ -1,0 +1,11 @@
+numpy
+
+streamlit
+
+pillow
+
+keras
+
+tensorflow-cpu
+
+h5py
