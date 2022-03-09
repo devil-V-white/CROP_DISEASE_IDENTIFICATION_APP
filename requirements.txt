@@ -4,3 +4,4 @@ pillow
 keras
 tensorflow-cpu
 h5py
+gunicorn
