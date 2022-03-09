@@ -1,1 +1,1 @@
-web: sh setup.sh && streamlit run crop.py
+web: gunicorn && streamlit run crop.py
